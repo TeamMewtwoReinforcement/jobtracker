@@ -1,0 +1,50 @@
+{
+  "name": "jobtracker",
+  "version": "1.0.0",
+  "description": "\"reinforcement project\"",
+  "main": "index.ts",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "start": "concurrently \"npm run server\" \"npm run dev\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon",
+    "dev": "webpack serve --open"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
+    "@babel/preset-typescript": "^7.26.0",
+    "@types/node": "^22.10.0",
+    "@types/react-dom": "^18.3.1",
+    "babel-loader": "^9.2.1",
+    "concurrently": "^9.1.0",
+    "css-loader": "^7.1.2",
+    "eslint": "^9.15.0",
+    "eslint-import-resolver-webpack": "^0.13.9",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-react": "^7.37.2",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.6.3",
+    "http-proxy-middleware": "^3.0.3",
+    "nodemon": "^3.1.7",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0",
+    "webpack-hot-middleware": "^2.26.1"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.3.0",
+    "node": "^20.18.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.0.1",
+    "redux": "^5.0.1"
+  }
+}
