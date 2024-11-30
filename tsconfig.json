@@ -11,8 +11,10 @@
       "moduleResolution": "nodenext",
       "strict": true,
       "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
       "noEmit": true,
       "allowImportingTsExtensions": true,
+      "skipLibCheck": true,
     },
     "include": [
         "src/**/*.ts",
