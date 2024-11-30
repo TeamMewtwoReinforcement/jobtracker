@@ -7,4 +7,4 @@ export type CustomError = {
     message: string | {err: string}
 }
 
-export type errObj
+// export type errObj

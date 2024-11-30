@@ -1,16 +1,18 @@
-import express, { Request, Response, NextFunction } from "express";
+import express , { Request, Response, NextFunction } from "express";
 import { CustomError } from '../types.ts'
 
-const path = require("path");
+// const path = require("path");
+import path from "path";
+//import userRoutes from "./routes/userRoutes.ts";
 const app = express();
-const PORT = 3000;
-const userRoutes = require("./routes/userRoutes.ts");
-import cookieParser from "cookie-parser";
+const PORT: number = 3000;
+const userRoutes = require("./routes/userRoutes");
+
 
 
 // Parse JSON bodies
 app.use(express.json());
-app.use(cookieParser());
+//app.use(cookieParser());
 
 // Serve static files from the dist directory
 app.use(express.static(path.resolve(__dirname, "..", "..", "dist")));

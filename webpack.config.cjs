@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     //entry point of app
-    entry: '/src/client/index.tsx',
+    entry: './src/client/index.tsx',
     output: {
         filename: 'bundle.js',
         publicPath: '/',
@@ -21,7 +21,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'], // Use the presets
+                        presets: ['@babel/preset-env', '@babel/preset-react', ['@babel/preset-typescript', { isTSX: true, allExtensions: true }]], // Use the presets
                       },
                 }
             },
@@ -50,6 +50,7 @@ module.exports = {
             publicPath: '/dist',
         },
         historyApiFallback: true,
+        port: 8080,
         proxy: [
             {
                 context: ['/'],
