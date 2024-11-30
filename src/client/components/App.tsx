@@ -1,4 +1,6 @@
 import React from 'react';
+import '../../client/styles.css';
+import Header from './Header';
 
 
 //By using React.FC, TypeScript automatically infers the type of the component’s props. Do we want to do that?
@@ -7,10 +9,7 @@ const App: React.FC = () => {
   
   return (
     <div>
-      <h1>Hello Test</h1>
-      <p>this is kayla's test. Will this render?</p>
-      <p>And another test</p>
-      <p>and another - this is rendering</p>
+      <Header />
     </div>
   );
 };
