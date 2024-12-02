@@ -2,12 +2,12 @@ import React from "react";
 
 const Header: React.FC = () => {
   return (
-      <div className='navbar bg-base-100 border-red-500'>
-        <div className='navbar-start border-red-500'>
-          <a className='btn btn-ghost text-xl'>NxtMove</a>
+      <div className='navbar bg-base-100'>
+        <div className='navbar-start'>
+          <a className='btn btn-ghost text-3xl'>NxtMove</a>
         </div>
         <div className='navbar-center hidden lg:flex'>
-          <ul className='menu menu-horizontal px-1'>
+          <ul className='menu menu-horizontal px-1 text-xl'>
           <li>
               <a>My Dashboard</a>
             </li>
