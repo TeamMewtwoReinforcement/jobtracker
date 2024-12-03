@@ -63,9 +63,10 @@ app.listen(PORT, () => {
 export default app;
 
 // ROUTES
+// signup - DONE 
 // login route
-// signup
 // post - createJobApp (post job details to db)
 // get - jobApps
 // patch - update job details
 // delete job app
+
