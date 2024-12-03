@@ -28,7 +28,7 @@ app.use(express.static(path.resolve(__dirname, ".../dist")));
 app.get("/", (req: Request, res: Response) =>
   res.sendFile(path.join(__dirname, "../dist/index.html"))
 );
-console.log('hitting line 25')
+
 // User Routes
 app.use("/user", userRoutes);
 

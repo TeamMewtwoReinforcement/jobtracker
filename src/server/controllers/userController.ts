@@ -29,7 +29,7 @@ const userController = {
                 email: email,
                 password: password,
             })
-
+            next();
 
         } catch (err) {
             const errObj = {

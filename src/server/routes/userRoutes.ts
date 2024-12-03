@@ -5,7 +5,7 @@ const router = express.Router();
 
 // signup route handler 
 router.post('/signup', userController.createUser, (req: Request, res: Response) => {
-  return res.status(200).send('User created')  ;
+  return res.status(200).send('User created');
 })
 
 // login is commented out in usercontroller now. uncomment this later
