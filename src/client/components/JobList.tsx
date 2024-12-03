@@ -1,7 +1,7 @@
 import React, {useEffect, useState } from "react";
 
 interface ApplicationDetails {
-  id: number;
+  id: string;
   companyName: string;
   jobTitle: string;
   location?: string;
@@ -14,14 +14,18 @@ interface ApplicationDetails {
 const JobList: React.FC = () => {
 
     const [jobs, setJobs] = useState<ApplicationDetails[]>([]);
+    //just for testing purposes. comment out when db call is set up
+    const testJobs: ApplicationDetails[] = [{id: '1234', companyName: 'ABC', jobTitle: 'software engineer', location: 'London', flexibility: 'hybrid', status: 'applied', dateApplied: '11.30.2024', contact: 'None'}, {id: '1235', companyName: 'DEF', jobTitle: 'full stack engineer', location: 'Orlando', flexibility: 'remote', status: 'Phone Screen', dateApplied: '11.10.2024', contact: 'None'}]
   
     useEffect(() => {
       const getJobs = async() => {
         try {
-          const response = await fetch("/jobs") //replace with endpoint
-          const data = await response.json();
-          console.log('returned data from getJobs:', data)
-          setJobs(data);
+          //for testing purposes. comment in the below for db call
+          //const response = await fetch("/jobs") //replace with endpoint
+          //const data = await response.json();
+          //console.log('returned data from getJobs:', data)
+          //setJobs(data);
+          setJobs(testJobs) //comment out when db is set up
         } catch (error) {
           console.error("error fetching jobs:", error);
         }
