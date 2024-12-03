@@ -1,4 +1,5 @@
 import React, {useEffect, useState } from "react";
+import SubmitButton from "./SubmitButton";
 
 interface ApplicationDetails {
   id: string;
@@ -74,6 +75,7 @@ const JobList: React.FC = () => {
   )}
         </tbody>
       </table>
+      <SubmitButton />
     </div>
   );
 };
