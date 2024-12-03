@@ -7,10 +7,9 @@ import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-//import userRoutes from "./routes/userRoutes.ts";
+import userRoutes from "./routes/userRoutes.ts";
 const app = express();
 const PORT: number = 3000;
-// import userRoutes from "./routes/userRoutes.ts"
 
 console.log("Server script loaded");
 
@@ -31,7 +30,7 @@ app.get("/", (req: Request, res: Response) =>
 );
 console.log('hitting line 25')
 // User Routes
-// app.use("/user", userRoutes);
+app.use("/user", userRoutes);
 
 // Catch-all route handler for any requests to an unknown route
 app.use('*', (req: Request, res: Response) => {
