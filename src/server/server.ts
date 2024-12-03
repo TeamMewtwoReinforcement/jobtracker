@@ -1,13 +1,21 @@
 import express , { Request, Response, NextFunction } from "express";
 import { CustomError } from '../types.ts'
 
-// const path = require("path");
 import path from "path";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 //import userRoutes from "./routes/userRoutes.ts";
 const app = express();
 const PORT: number = 3000;
-const userRoutes = require("./routes/userRoutes");
+// import userRoutes from "./routes/userRoutes.ts"
 
+console.log("Server script loaded");
+
+import cors from 'cors';
+app.use(cors());  // Allow all origins by default
 
 
 // Parse JSON bodies
@@ -15,15 +23,15 @@ app.use(express.json());
 //app.use(cookieParser());
 
 // Serve static files from the dist directory
-app.use(express.static(path.resolve(__dirname, "..", "..", "dist")));
+app.use(express.static(path.resolve(__dirname, ".../dist")));
 
 // Main route - serve main HTML file
 app.get("/", (req: Request, res: Response) =>
   res.sendFile(path.join(__dirname, "../dist/index.html"))
 );
-
+console.log('hitting line 25')
 // User Routes
-app.use("/user", userRoutes);
+// app.use("/user", userRoutes);
 
 // Catch-all route handler for any requests to an unknown route
 app.use('*', (req: Request, res: Response) => {
@@ -46,13 +54,14 @@ app.use((err: CustomError, req: Request, res: Response, next: NextFunction) => {
     return res.status(errorObj.status).json(errorObj.message);
   });
 
+console.log("About to start the server...")
 //start server
 app.listen(PORT, () => {
     console.log(`Server listening on port: ${PORT}`);
   });   
   
 
-module.exports = app;
+export default app;
 
 // ROUTES
 // login route
