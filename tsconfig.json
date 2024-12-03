@@ -1,24 +1,52 @@
+// {
+//     "compilerOptions": {
+//       "outDir": "./dist",
+//       "rootDir": "./src",
+//       "noImplicitAny": true,
+//       "module": "CommonJS",
+//       "target": "ES6",
+//       "jsx": "react-jsx",
+//       "sourceMap": true,
+//       "allowJs": true,
+//       "moduleResolution": "node",
+//       "strict": true,
+//       "esModuleInterop": true,
+//       "forceConsistentCasingInFileNames": true,
+//       "noEmit": true,
+//       "allowImportingTsExtensions": true,
+//       "skipLibCheck": true,
+//     },
+//     "include": [
+//         "src/**/*.ts",
+//         "src/**/*.tsx",
+//     ],
+//     "exclude": [
+//         "node_modules",
+//         "dist"
+//     ]
+//   }
 {
-    "compilerOptions": {
-      "outDir": "./dist",
-      "rootDir": "./src",
-      "noImplicitAny": true,
-      "module": "ESNext",
-      "target": "es6",
-      "jsx": "react-jsx",
-      "allowJs": true,
-      "moduleResolution": "node",
-      "strict": true,
-      "esModuleInterop": true,
-      "noEmit": true,
-      "allowImportingTsExtensions": true,
-    },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.tsx",
-    ],
-    "exclude": [
-        "node_modules",
-        "dist"
-    ]
-  }
+  "compilerOptions": {
+    "module": "nodenext",
+    "target": "ESNext",
+    "moduleResolution": "nodenext",  // For better compatibility with Node.js ESM
+    "outDir": "./dist", 
+    "rootDir": "./src",
+    "esModuleInterop": true,
+    "strict": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "sourceMap": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
