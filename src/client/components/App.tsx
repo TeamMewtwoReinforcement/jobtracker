@@ -4,6 +4,9 @@ import Header from './Header';
 import JobList from './JobList';
 import BarChart from './BarChart';
 import DashboardList from './DashboardList';
+import NewJobForm from './NewJobForm';
+import SubmitButton from './SubmitButton';
+
 
 
 
@@ -16,7 +19,7 @@ const App: React.FC = () => {
       <Header />
       <JobList />
       <BarChart />
-      <DashboardList />
+      <NewJobForm />
     </div>
   );
 };
