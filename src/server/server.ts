@@ -1,19 +1,28 @@
-import express, { Request, Response, NextFunction } from "express";
+import express , { Request, Response, NextFunction } from "express";
 import { CustomError } from '../types.ts'
 
-const path = require("path");
+import path from "path";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+import userRoutes from "./routes/userRoutes.ts";
 const app = express();
-const PORT = 3000;
-const userRoutes = require("./routes/userRoutes.ts");
-import cookieParser from "cookie-parser";
+const PORT: number = 3000;
+
+console.log("Server script loaded");
+
+import cors from 'cors';
+app.use(cors());  // Allow all origins by default
 
 
 // Parse JSON bodies
 app.use(express.json());
-app.use(cookieParser());
+//app.use(cookieParser());
 
 // Serve static files from the dist directory
-app.use(express.static(path.resolve(__dirname, "..", "..", "dist")));
+app.use(express.static(path.resolve(__dirname, ".../dist")));
 
 // Main route - serve main HTML file
 app.get("/", (req: Request, res: Response) =>
@@ -44,18 +53,20 @@ app.use((err: CustomError, req: Request, res: Response, next: NextFunction) => {
     return res.status(errorObj.status).json(errorObj.message);
   });
 
+console.log("About to start the server...")
 //start server
 app.listen(PORT, () => {
     console.log(`Server listening on port: ${PORT}`);
   });   
   
 
-module.exports = app;
+export default app;
 
 // ROUTES
+// signup - DONE 
 // login route
-// signup
 // post - createJobApp (post job details to db)
 // get - jobApps
 // patch - update job details
 // delete job app
+
