@@ -1,13 +1,17 @@
 import React from "react";
 
-const SubmitButton: React.FC = () => {
 
-  const handleClick = () => {
-    //function to handle add new job to table
-  }  
+interface SubmitButtonProps {
+  label: string;
+  handleClick: () => void;
+}
+
+
+const SubmitButton: React.FC<SubmitButtonProps> = ({ label, handleClick }) => {
+
   
   return (
-    <button className="btn btn-wide" onClick={handleClick}>+  Add New Job</button>
+    <button className="btn btn-wide" type='button' onClick={handleClick}>{label}</button>
   )
 }
 

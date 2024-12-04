@@ -75,7 +75,7 @@ const NewJobForm: React.FC = () => {
         <input type='text' className='grow' name='contact' value={formData.contact} placeholder='Who Do You Know?' onChange={handleInputChange}/>
         {/* <span className='badge badge-info'>Optional</span> */}
       </label>
-      <SubmitButton />
+      <SubmitButton label='submit' handleClick={handleSubmit}/>
     </form>
   );
 };

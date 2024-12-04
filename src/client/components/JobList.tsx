@@ -1,5 +1,6 @@
 import React, {useEffect, useState } from "react";
 import SubmitButton from "./SubmitButton";
+import NewJobForm from "./NewJobForm";
 
 interface ApplicationDetails {
   id: string;
@@ -15,9 +16,14 @@ interface ApplicationDetails {
 const JobList: React.FC = () => {
 
     const [jobs, setJobs] = useState<ApplicationDetails[]>([]);
+    const [showForm, setShowForm] = useState(false)
     //just for testing purposes. comment out when db call is set up
     const testJobs: ApplicationDetails[] = [{id: '1234', companyName: 'ABC', jobTitle: 'software engineer', location: 'London', flexibility: 'hybrid', status: 'applied', dateApplied: '11.30.2024', contact: 'None'}, {id: '1235', companyName: 'DEF', jobTitle: 'full stack engineer', location: 'Orlando', flexibility: 'remote', status: 'Phone Screen', dateApplied: '11.10.2024', contact: 'None'}]
   
+    const addNewJob = () => {
+      setShowForm(!showForm);
+    };
+
     useEffect(() => {
       const getJobs = async() => {
         try {
@@ -75,7 +81,8 @@ const JobList: React.FC = () => {
   )}
         </tbody>
       </table>
-      <SubmitButton />
+      <SubmitButton label="+ Add New Job" handleClick={addNewJob} />
+      {showForm && <NewJobForm />}
     </div>
   );
 };
