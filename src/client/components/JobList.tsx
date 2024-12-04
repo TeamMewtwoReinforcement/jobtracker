@@ -1,6 +1,6 @@
 import React, {useEffect, useState } from "react";
-import SubmitButton from "./SubmitButton";
-import NewJobForm from "./NewJobForm";
+import SubmitButton from "./SubmitButton.tsx";
+import NewJobForm from "./NewJobForm.tsx";
 
 interface ApplicationDetails {
   id: string;
