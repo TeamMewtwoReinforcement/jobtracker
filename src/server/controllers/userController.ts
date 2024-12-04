@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 // import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from 'express';
 
-import supabase from '../db/dbconfig.ts'
+import supabase from '../db/dbconfig.js'
 
 // const JWT_SECRET = process.env.JWT_SECRET;
 // const SALT_WORK_FACTOR = 10;

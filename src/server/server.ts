@@ -1,13 +1,14 @@
 import express , { Request, Response, NextFunction } from "express";
-import { CustomError } from '../types.ts'
+import { CustomError } from '../types.js'
 
 import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import userRoutes from "./routes/userRoutes.js";
+import jobAppRoutes from "./routes/jobFormRoutes.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-import userRoutes from "./routes/userRoutes.ts";
 const app = express();
 const PORT: number = 3000;
 
@@ -29,8 +30,14 @@ app.get("/", (req: Request, res: Response) =>
   res.sendFile(path.join(__dirname, "../dist/index.html"))
 );
 
+
 // User Routes
 app.use("/user", userRoutes);
+
+
+//Job Application Routes 
+app.use("/job", jobAppRoutes);
+
 
 // Catch-all route handler for any requests to an unknown route
 app.use('*', (req: Request, res: Response) => {
