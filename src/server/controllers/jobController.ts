@@ -20,13 +20,13 @@ const jobController = {
         .insert([
           {
             id: user_id,
-            "Company Name": company,
-            Role: title,
-            "Date Applied": dateApplied,
-            "Application Status": status,
-            Location: location,
-            "Location Type": flexibility,
-            Contact: contact,
+            company_name: company,
+            role: title,
+            date_applied: dateApplied,
+            application_status: status,
+            location: location,
+            location_type: flexibility,
+            contact: contact,
           },
         ])
         .select();
@@ -49,8 +49,7 @@ const jobController = {
   },
 
   getAllJobs: async (req: Request, res: Response, next: NextFunction) => {
-    // TODO replace this with req.body i
-    const user_id = "cd6fc064-2539-4ab6-b70a-47bbd729cac9";
+    const { user_id } = req.body;
     let { data: jobs, error } = await supabase
       .from("jobs")
       .select("*")
@@ -61,11 +60,42 @@ const jobController = {
   },
 
   updateJob: async (req: Request, res: Response, next: NextFunction) => {
-    // TODO: add functionality
+    const {
+      job_id,
+      user_id,
+      company,
+      title,
+      location,
+      flexibility,
+      status,
+      dateApplied,
+      contact,
+    } = req.body;
+    let { data: job, error } = await supabase
+      .from("jobs")
+      .update({
+        id: user_id,
+        company_name: company,
+        role: title,
+        date_applied: dateApplied,
+        application_status: status,
+        location: location,
+        location_type: flexibility,
+        contact: contact,
+      })
+      .eq("job_id", job_id);
+    res.locals.job = job;
+    return next();
   },
 
   deleteJob: async (req: Request, res: Response, next: NextFunction) => {
-    // TODO: add functionality
+    const { job_id } = req.body;
+    let { data: job, error } = await supabase
+      .from("jobs")
+      .delete()
+      .eq("job_id", job_id);
+    res.locals.job = job;
+    return next();
   },
 };
 
