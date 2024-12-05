@@ -49,6 +49,7 @@ module.exports = {
             directory: path.resolve(__dirname, 'dist'),
             publicPath: '/dist',
         },
+        hot: true,
         historyApiFallback: true,
         port: 8080,
         proxy: [
