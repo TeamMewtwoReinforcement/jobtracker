@@ -27,7 +27,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader','css-loader']
+                use: ['style-loader','css-loader', 'postcss-loader']
             },
             {
                 test: /\.(png|jpg|gif|jpeg|svg)$/i,
@@ -49,6 +49,7 @@ module.exports = {
             directory: path.resolve(__dirname, 'dist'),
             publicPath: '/dist',
         },
+        hot: true,
         historyApiFallback: true,
         port: 8080,
         proxy: [
