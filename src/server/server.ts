@@ -32,6 +32,8 @@ app.get("/", (req: Request, res: Response) =>
 // User Routes
 app.use("/user", userRoutes);
 
+
+
 // Catch-all route handler for any requests to an unknown route
 app.use('*', (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "../dist/index.html"))

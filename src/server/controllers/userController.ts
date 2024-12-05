@@ -1,6 +1,6 @@
 // require db 
 //const bcrypt = require('bcryptjs');
-import bcrypt from 'bcryptjs'
+//import bcrypt from 'bcryptjs'
 // import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from 'express';
 
@@ -39,6 +39,8 @@ const userController = {
             return next(errObj);
         }
     }
+
+
     // create new user 
     // store new user into reslocals 
 }
