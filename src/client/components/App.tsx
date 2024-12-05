@@ -1,11 +1,11 @@
 import React from 'react';
 import '../../client/styles.css';
-import Header from './Header.js';
-import JobList from './JobList.js';
+import Header from './Header.tsx';
+import JobList from './JobList.tsx';
 import BarChart from './BarChart.js';
-import DashboardList from './DashboardList.js';
-import NewJobForm from './NewJobForm.js';
-import SubmitButton from './SubmitButton.js';
+import DashboardList from './DashboardList.tsx';
+import NewJobForm from './NewJobForm.tsx';
+import SubmitButton from './SubmitButton.tsx';
 
 
 

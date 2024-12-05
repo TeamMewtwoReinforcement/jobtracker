@@ -1,5 +1,5 @@
 import React from "react";
-import SubmitButton from "./SubmitButton.js";
+import SubmitButton from "./SubmitButton.tsx";
 import { useState, useEffect } from "react";
    
 
