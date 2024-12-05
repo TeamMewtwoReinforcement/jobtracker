@@ -1,6 +1,7 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SubmitButton from "./SubmitButton.tsx";
 import NewJobForm from "./NewJobForm.tsx";
+import Modal from "./Modal.tsx";
 
 interface ApplicationDetails {
   id: string;
@@ -14,34 +15,59 @@ interface ApplicationDetails {
 }
 
 const JobList: React.FC = () => {
+  const [jobs, setJobs] = useState<ApplicationDetails[]>([]);
+  // const [showForm, setShowForm] = useState(false);
+  const [showModal, setShowModal ] = useState(false);
+  //just for testing purposes. comment out when db call is set up
+  const testJobs: ApplicationDetails[] = [
+    {
+      id: "1234",
+      companyName: "ABC",
+      jobTitle: "software engineer",
+      location: "London",
+      flexibility: "hybrid",
+      status: "applied",
+      dateApplied: "11.30.2024",
+      contact: "None",
+    },
+    {
+      id: "1235",
+      companyName: "DEF",
+      jobTitle: "full stack engineer",
+      location: "Orlando",
+      flexibility: "remote",
+      status: "Phone Screen",
+      dateApplied: "11.10.2024",
+      contact: "None",
+    },
+  ];
 
-    const [jobs, setJobs] = useState<ApplicationDetails[]>([]);
-    const [showForm, setShowForm] = useState(false)
-    //just for testing purposes. comment out when db call is set up
-    const testJobs: ApplicationDetails[] = [{id: '1234', companyName: 'ABC', jobTitle: 'software engineer', location: 'London', flexibility: 'hybrid', status: 'applied', dateApplied: '11.30.2024', contact: 'None'}, {id: '1235', companyName: 'DEF', jobTitle: 'full stack engineer', location: 'Orlando', flexibility: 'remote', status: 'Phone Screen', dateApplied: '11.10.2024', contact: 'None'}]
-  
-    const addNewJob = () => {
-      setShowForm(!showForm);
+  const addNewJob = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  }
+
+  useEffect(() => {
+    const getJobs = async () => {
+      try {
+        //for testing purposes. comment in the below for db call
+        //const response = await fetch("/jobs") //replace with endpoint
+        //const data = await response.json();
+        //console.log('returned data from getJobs:', data)
+        //setJobs(data);
+        setJobs(testJobs); //comment out when db is set up
+      } catch (error) {
+        console.error("error fetching jobs:", error);
+      }
     };
-
-    useEffect(() => {
-      const getJobs = async() => {
-        try {
-          //for testing purposes. comment in the below for db call
-          //const response = await fetch("/jobs") //replace with endpoint
-          //const data = await response.json();
-          //console.log('returned data from getJobs:', data)
-          //setJobs(data);
-          setJobs(testJobs) //comment out when db is set up
-        } catch (error) {
-          console.error("error fetching jobs:", error);
-        }
-      };
-      getJobs();
-    }, [])
+    getJobs();
+  }, []);
 
   return (
-    <div className='overflow-x-auto'>
+    <div className='overflow-x-auto mx-auto max-w-6xl px-4 mt-24'>
       <table className='table'>
         {/* head */}
         <thead>
@@ -71,18 +97,20 @@ const JobList: React.FC = () => {
                 <td>{job.contact}</td>
               </tr>
             ))
-  ) : (
-    <tr>
-      {/*if no results from query, display 'no jobs found' */}
-      <td colSpan={8} className="text-center">
-        No jobs found. Add an application by clicking the button below.
-      </td>
-    </tr>
-  )}
+          ) : (
+            <tr>
+              {/*if no results from query, display 'no jobs found' */}
+              <td colSpan={8} className='text-center'>
+                No jobs found. Add an application by clicking the button below.
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
-      <SubmitButton label="+ Add New Job" handleClick={addNewJob} />
-      {showForm && <NewJobForm />}
+      <div className='text-right mt-4'>
+        <SubmitButton label='+ Add New Job' handleClick={addNewJob} />
+      </div>
+      {showModal && <Modal onClose={closeModal}><NewJobForm /></Modal>}
     </div>
   );
 };

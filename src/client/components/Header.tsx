@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
   return (
@@ -9,13 +10,13 @@ const Header: React.FC = () => {
         <div className='navbar-center hidden lg:flex'>
           <ul className='menu menu-horizontal px-1 text-xl'>
           <li>
-              <a>My Dashboard</a>
+              <Link to="/dashboard">My Dashboard</Link>
             </li>
             <li>
-              <a>My Job List</a>
+              <Link to="/job-list">My Job List</Link>
             </li>
             <li>
-              <a>Contacts</a>
+              <Link to="/contacts">Contacts</Link>
             </li>
           </ul>
         </div>
