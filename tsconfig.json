@@ -27,7 +27,7 @@
 //   }
 {
   "compilerOptions": {
-    "module": "nodenext",
+    "module": "NodeNext",
     "target": "ESNext",
     "moduleResolution": "nodenext",  // For better compatibility with Node.js ESM
     "outDir": "./dist", 
@@ -39,8 +39,9 @@
     "jsx": "react-jsx",
     "sourceMap": true,
     "noEmit": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
   },
+  
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx"

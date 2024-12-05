@@ -12,7 +12,7 @@ const jobFormController = {
             const { data, error } = await supabase
                 .from('jobs')
                 .insert([{
-                    "id": uuidv4(),
+                    // "id": uuidv4(),
                     "Company Name": 'Facebook',
                     "Role": 'L5',
                     "Date Applied": 'December 2, 2024',
