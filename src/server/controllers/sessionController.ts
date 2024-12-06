@@ -34,7 +34,6 @@ const sessionController = {
             return res.status(401).json({ message: 'Unauthorized' });
         }
     
-        // Verify the session using the access token
         const { data, error } = await supabase.auth.getUser(token);
     
         if (error) {
