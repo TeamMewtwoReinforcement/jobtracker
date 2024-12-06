@@ -1,19 +1,25 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import '../../client/styles.css';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Header from './Header.tsx';
+import JobList from './JobList.tsx';
+import BarChart from './BarChart.js';
 
 
+//By using React.FC, TypeScript automatically infers the type of the component’s props. Do we want to do that?
+//Probaby not, but just did it for set up
 const App: React.FC = () => {
-  
+
   return (
-    <div>
-      <h1>Hello Test</h1>
-      <p>this is kayla's test. Will this render?</p>
-      <p>And another test</p>
-      <p>and another</p>
-    </div>
-  );
+    <Router>
+     <Header />
+     <Routes>
+      <Route path="/dashboard" element={<BarChart />} />
+      <Route path="/job-list" element={<JobList />} />
+      {/* <Route path="/contacts" element={<tbd />} /> */}
+     </Routes>
+    </Router>
+  )
 };
-
-
 
 export default App;

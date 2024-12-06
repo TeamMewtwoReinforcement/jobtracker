@@ -1,21 +1,19 @@
 import express, { Request, Response, NextFunction } from "express";
 import userController from '../controllers/userController.ts';
+import sessionController from '../controllers/sessionController.ts';
 
 const router = express.Router(); 
 
 // signup route handler 
-router.post('/signup', userController.createUser, (req: Request, res: Response) => {
-  return res.status(200).send('User created');
+router.post('/signup', userController.createUser, sessionController.createSession, (req: Request, res: Response) => {
+  return res.status(201).json({ message: 'User created successfully', user: res.locals.user })
 })
 
-router.get('/pullJobs', userController.pullJobs, (req: Request, res: Response) => {
-  console.log(res.locals.jobs)
-  return res.status(200).send(res.locals.jobs);
-})
+
 // login is commented out in usercontroller now. uncomment this later
 // login route handler
-// router.get('/login', userController.login, (req: Request, res: Response) => {
-//     return res.status(200).send('User logged in')  ;
-//   })
+router.post('/login', userController.loginUser, sessionController.createSession, (req: Request, res: Response) => {
+  return res.status(200).json({ message: 'User logged in successfully', user: res.locals.user })
+  })
 
 export default router;

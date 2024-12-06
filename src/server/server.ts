@@ -8,12 +8,14 @@ import { dirname } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 import userRoutes from "./routes/userRoutes.ts";
+import jobRoutes from "./routes/jobRoutes.ts";
 const app = express();
 const PORT: number = 3000;
 
 console.log("Server script loaded");
 
 import cors from 'cors';
+import sessionController from "./controllers/sessionController.ts";
 app.use(cors());  // Allow all origins by default
 
 
@@ -32,7 +34,8 @@ app.get("/", (req: Request, res: Response) =>
 // User Routes
 app.use("/user", userRoutes);
 
-
+// Job Routes
+app.use("/job", jobRoutes)
 
 // Catch-all route handler for any requests to an unknown route
 app.use('*', (req: Request, res: Response) => {
@@ -66,7 +69,7 @@ export default app;
 
 // ROUTES
 // signup - DONE 
-// login route
+// login route - DONE (need to validate tokens for future db requests from client)
 // post - createJobApp (post job details to db)
 // get - jobApps
 // patch - update job details
