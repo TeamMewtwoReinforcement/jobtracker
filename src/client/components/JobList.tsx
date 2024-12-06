@@ -76,7 +76,7 @@ const JobList: React.FC = () => {
             <th>Company Name</th>
             <th>Job Title</th>
             <th>Location</th>
-            <th>Flexibility</th>
+            <th>Location Flexibility</th>
             <th>Status</th>
             <th>Date Applied</th>
             <th>Contact</th>
