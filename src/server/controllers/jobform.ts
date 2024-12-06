@@ -5,21 +5,20 @@ import { Response, Request, NextFunction } from 'express';
 const jobFormController = {
     createJobApplication: async (req: Request, res: Response, next: NextFunction) => {
 
-        const { userid, company, jobtitle, status, dateapplied, } = req.body;
+        const { company, title, location, flexibility, status, dateApplied, contact } = req.body;
 
         try {
 
             const { data, error } = await supabase
                 .from('jobs')
                 .insert([{
-                    // "id": uuidv4(),
-                    "Company Name": 'Facebook',
-                    "Role": 'L5',
-                    "Date Applied": 'December 2, 2024',
-                    "Application Status": 'Applied',
-                    "Location": 'New York',
-                    "Location Type": 'Hybrid',
-                    "Contact": 'Sally'
+                    "Company Name": company,
+                    "Role": title,
+                    "Date Applied": dateApplied,
+                    "Application Status": status,
+                    "Location": location,
+                    "Location Type": flexibility,
+                    "Contact": contact
                 }],)
                 .select()
 

@@ -26,8 +26,10 @@ const NewJobForm: React.FC = () => {
   //insert new job into db
   const handleSubmit = async () => {
     console.log("in handle submit inside newjobform component");
+
+    const url = "https://localhost:3000/job/applicationsignup"
     try {
-      const response = await fetch("tbd", {
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
