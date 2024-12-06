@@ -1,6 +1,4 @@
 // require db 
-import bcrypt from 'bcryptjs'
-import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from 'express';
 
 import supabase from '../db/dbconfig.ts'
