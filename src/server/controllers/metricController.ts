@@ -3,15 +3,16 @@ import supabase from "../db/dbconfig.ts";
 
 const metricController = {
 
-  interestedStatusCount: async (req: Request, res: Response, next: NextFunction) => {
+  statusCount: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { user_id } = req.body;  
+      const { user_id, status } = req.body;  
       let { count, error } = await supabase
         .from("jobs")
         .select("*", { count: "exact" , head: true })
-        .eq("id", user_id);
-      console.log("interested count:", count);
-      res.locals.interestedStatusCount = count; 
+        .eq("id", user_id)
+        .eq("application_status", status);
+      console.log(`${status} count: ${count}`);
+      res.locals.statusCount = count; 
       return next();   
 
     } catch (err: any) {
@@ -22,6 +23,8 @@ const metricController = {
           return next(errObj);
     }
   }
+
+
 };
 
 export default metricController; 
