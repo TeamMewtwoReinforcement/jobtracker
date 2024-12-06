@@ -1,10 +1,5 @@
-// require db 
 import { Request, Response, NextFunction } from 'express';
-
 import supabase from '../db/dbconfig.ts'
-
-// const JWT_SECRET = process.env.JWT_SECRET;
-// const SALT_WORK_FACTOR = 10;
 
 
 const userController = {

@@ -9,6 +9,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 import userRoutes from "./routes/userRoutes.ts";
 import jobRoutes from "./routes/jobRoutes.ts";
+import metricRoutes from "./routes/metricRoutes.ts";
 const app = express();
 const PORT: number = 3000;
 
@@ -34,7 +35,10 @@ app.get("/", (req: Request, res: Response) =>
 app.use("/user", userRoutes);
 
 // Job Routes
-app.use("/job", jobRoutes)
+app.use("/job", jobRoutes);
+
+// Metrics Routes 
+app.use("/metrics", metricRoutes);
 
 // Catch-all route handler for any requests to an unknown route
 app.use('*', (req: Request, res: Response) => {
