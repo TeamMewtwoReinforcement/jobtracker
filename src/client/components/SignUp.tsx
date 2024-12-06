@@ -103,8 +103,6 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ closeModal }) => {
     );
 
 
-//TAKE OUT
-Testing
 
 }
 
