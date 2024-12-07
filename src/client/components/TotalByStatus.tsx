@@ -6,25 +6,45 @@ interface StatusCounts {
   Applied: number;
   Interviewing: number;
   Offer: number;
+  Rejected: number;
 }
 
 const TotalByStatus = () => {
   const [statusCounts, setStatusCounts] = useState<StatusCounts>({
-    Interested: 17,
-    Applied: 15,
-    Interviewing: 13,
+    Interested: 0,
+    Applied: 0,
+    Interviewing: 0,
     Offer: 0,
+    Rejected: 0
   });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("tbd");
-        if (!response.ok) {
-          throw new Error("failed to fetch");
-        }
-        const data: StatusCounts = await response.json();
-        setStatusCounts(data);
+        // const response = await fetch("tbd");
+        // if (!response.ok) {
+        //   throw new Error("failed to fetch");
+        // }
+        let user_id = "cd6fc064-2539-4ab6-b70a-47bbd729cac9";
+        const statuses = ["Interested", "Applied", "Interviewing", "Offer", "Rejected"];
+        const fetchStatusCount = async (arr: Array<string>) => {
+          for (let i = 0; i < arr.length; i++) {
+            const response =  await fetch(`/metrics/statusCount?status=${arr[i]}&user_id=${user_id}`);
+            const parsedResponse = await response.json();
+            // @ts-ignore
+            console.log(parsedResponse);
+            if (response.ok) {
+              const responseNum = JSON.stringify(parsedResponse); 
+              console.log(`Response String: ${responseNum}`);
+              setStatusCounts({
+                ...statusCounts, 
+                [arr[i]] : responseNum,
+              })
+            }
+          }
+        };
+        fetchStatusCount(statuses);
+        console.dir(`Status Counts: ${statusCounts}`); 
       } catch (error) {
         console.error("error fetching data:", error);
       }
