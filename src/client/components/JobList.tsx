@@ -3,14 +3,14 @@ import SubmitButton from "./SubmitButton.tsx";
 import NewJobForm from "./NewJobForm.tsx";
 import Modal from "./Modal.tsx";
 
-interface ApplicationDetails {
+export interface ApplicationDetails {
   id: string;
-  companyName: string;
-  jobTitle: string;
+  company_name: string;
+  role: string;
   location?: string;
-  flexibility?: string;
-  status: string;
-  dateApplied: string;
+  location_type?: string;
+  application_status: string;
+  date_applied: string;
   contact?: string;
 }
 
@@ -18,29 +18,6 @@ const JobList: React.FC = () => {
   const [jobs, setJobs] = useState<ApplicationDetails[]>([]);
   // const [showForm, setShowForm] = useState(false);
   const [showModal, setShowModal ] = useState(false);
-  //just for testing purposes. comment out when db call is set up
-  const testJobs: ApplicationDetails[] = [
-    {
-      id: "1234",
-      companyName: "ABC",
-      jobTitle: "software engineer",
-      location: "London",
-      flexibility: "hybrid",
-      status: "applied",
-      dateApplied: "11.30.2024",
-      contact: "None",
-    },
-    {
-      id: "1235",
-      companyName: "DEF",
-      jobTitle: "full stack engineer",
-      location: "Orlando",
-      flexibility: "remote",
-      status: "Phone Screen",
-      dateApplied: "11.10.2024",
-      contact: "None",
-    },
-  ];
 
   const addNewJob = () => {
     setShowModal(true);
@@ -53,12 +30,13 @@ const JobList: React.FC = () => {
   useEffect(() => {
     const getJobs = async () => {
       try {
-        //for testing purposes. comment in the below for db call
-        //const response = await fetch("/jobs") //replace with endpoint
-        //const data = await response.json();
-        //console.log('returned data from getJobs:', data)
-        //setJobs(data);
-        setJobs(testJobs); //comment out when db is set up
+        const response = await fetch("/job/getAllJobs") 
+        if (!response.ok) {
+          throw new Error(`HTTP ERROR!! Status: ${response.status}`)
+        }
+        const data = await response.json();
+        console.log('returned data from getJobs:', data)
+        setJobs(data.jobs);
       } catch (error) {
         console.error("error fetching jobs:", error);
       }
@@ -66,6 +44,33 @@ const JobList: React.FC = () => {
     getJobs();
   }, []);
 
+    // Create a new job
+    const createJob = async (newJob: Omit<ApplicationDetails, "id">) => {
+      try {
+        const response = await fetch("/job/createJob", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newJob),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Failed to create job. Status: ${response.status}`);
+        }
+  
+        const createdJob = await response.json();
+        console.log("Job created successfully:", createdJob);
+  
+        // Update state with the new job
+        setJobs((prevJobs) => [...prevJobs, createdJob]);
+        closeModal(); // Close the modal after successful creation
+      } catch (error) {
+        console.error("Error creating job:", error);
+      }
+    };
+
+    
   return (
     <div className='overflow-x-auto mx-auto max-w-6xl px-4 mt-24'>
       <table className='table'>
@@ -88,12 +93,12 @@ const JobList: React.FC = () => {
             jobs.map((job, index) => (
               <tr key={job.id}>
                 <th>{index + 1}</th>
-                <td>{job.companyName}</td>
-                <td>{job.jobTitle}</td>
+                <td>{job.company_name}</td>
+                <td>{job.role}</td>
                 <td>{job.location}</td>
-                <td>{job.flexibility}</td>
-                <td>{job.status}</td>
-                <td>{job.dateApplied}</td>
+                <td>{job.location_type}</td>
+                <td>{job.application_status}</td>
+                <td>{job.date_applied}</td>
                 <td>{job.contact}</td>
               </tr>
             ))
@@ -110,7 +115,11 @@ const JobList: React.FC = () => {
       <div className='text-right mt-4'>
         <SubmitButton label='+ Add New Job' handleClick={addNewJob} />
       </div>
-      {showModal && <Modal onClose={closeModal}><NewJobForm /></Modal>}
+      {showModal && (
+        <Modal onClose={closeModal}>
+          <NewJobForm onSubmit={createJob} closeModal={closeModal} />
+        </Modal>
+      )}
     </div>
   );
 };

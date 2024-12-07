@@ -4,7 +4,7 @@ import supabase from "../db/dbconfig.ts";
 const jobController = {
   createJob: async (req: Request, res: Response, next: NextFunction) => {
     const {
-      user_id,
+      user_id = "cd6fc064-2539-4ab6-b70a-47bbd729cac9",
       company,
       title,
       location,
@@ -49,7 +49,9 @@ const jobController = {
   },
 
   getAllJobs: async (req: Request, res: Response, next: NextFunction) => {
-    const { user_id } = req.body;
+    // const { user_id } = req.body;
+    // static for now, use req body later for dynamic
+    const user_id = "cd6fc064-2539-4ab6-b70a-47bbd729cac9";
     let { data: jobs, error } = await supabase
       .from("jobs")
       .select("*")
