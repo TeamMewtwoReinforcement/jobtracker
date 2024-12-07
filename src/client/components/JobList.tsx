@@ -3,9 +3,11 @@ import SubmitButton from "./SubmitButton.tsx";
 import NewJobForm from "./NewJobForm.tsx";
 import Modal from "./Modal.tsx";
 import LoadingSpinner from "./LoadingSpinner.tsx";
-//import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
+import ConfirmDeleteModal from "./ConfirmDeleteModal.tsx";
 
 export interface ApplicationDetails {
+  job_id: string;
   id: string;
   company_name: string;
   role: string;
@@ -20,6 +22,9 @@ const JobList: React.FC = () => {
   const [jobs, setJobs] = useState<ApplicationDetails[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [jobToDelete, setJobToDelete] = useState<ApplicationDetails | null>(
+    null
+  );
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -62,20 +67,28 @@ const JobList: React.FC = () => {
     }
   };
 
-  // const deleteJob = async (jobId: string) => {
-  //   try {
-  //     const response = await fetch("/job/deleteJob", {
-  //       method: "DELETE",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ job_id: jobId }),
-  //     });
-  //     if (!response.ok) throw new Error(`Error: ${response.status}`);
-  //     setJobs((prevJobs) => prevJobs.filter((job) => job.id !== jobId)); // Update local state
-  //     console.log("Job deleted successfully.");
-  //   } catch (error) {
-  //     console.error("Error deleting job:", error);
-  //   }
-  // };
+  const deleteJob = async (jobId: string) => {
+    try {
+      const response = await fetch("/job/deleteJob", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ job_id: jobId }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      // Remove the job from the state after successful deletion
+      setJobs((prevJobs) => prevJobs.filter((job) => job.job_id !== jobId));
+    } catch (error) {
+      console.error("Error deleting job:", error);
+    } finally {
+      setJobToDelete(null); // Close the modal after deletion
+    }
+  };
 
   useEffect(() => {
     fetchJobs();
@@ -113,20 +126,21 @@ const JobList: React.FC = () => {
                     <td>{job.application_status}</td>
                     <td>{job.date_applied}</td>
                     <td>{job.contact}</td>
-                    {/* <td>
-                      <button
+                    <td>
+                    <button
                         className="text-grey-500 hover:text-grey-700"
-                        onClick={() => deleteJob(job.id)}
+                        onClick={() => setJobToDelete(job)} 
                       >
                         <FaTrashAlt />
                       </button>
-                    </td> */}
+                    </td>
                   </tr>
                 ))
               ) : (
                 <tr>
                   <td colSpan={9} className="text-center">
-                    No jobs found. Add an application by clicking the button below.
+                    No jobs found. Add an application by clicking the button
+                    below.
                   </td>
                 </tr>
               )}
@@ -139,6 +153,16 @@ const JobList: React.FC = () => {
             <Modal onClose={closeModal}>
               <NewJobForm onSubmit={createJob} closeModal={closeModal} />
             </Modal>
+          )}
+          {jobToDelete && (
+            <ConfirmDeleteModal
+              onClose={() => setJobToDelete(null)} // Close modal without deleting
+              onConfirm={() => {
+                if (jobToDelete) {
+                  deleteJob(jobToDelete.job_id); // Delete the job when confirmed
+                }
+              }}
+            />
           )}
         </>
       )}
