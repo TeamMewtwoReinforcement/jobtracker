@@ -9,7 +9,6 @@ import jobAppRoutes from "./routes/jobFormRoutes.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-import userRoutes from "./routes/userRoutes.ts";
 import jobRoutes from "./routes/jobRoutes.ts";
 import cookieParser from 'cookie-parser';
 

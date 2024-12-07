@@ -13,6 +13,7 @@ import supabase from '../db/dbconfig.js'
 const userController = {
     // Middleware to create a new user
     createUser: async (req: Request, res: Response, next: NextFunction) => {
+        console.log(req.body)
         try {
             
             const { email, password } = req.body;
@@ -28,7 +29,9 @@ const userController = {
                 password: password,
             })
             res.locals.user = data;
-            //console.log('res.locals.user :', res.locals.user )
+            console.log(error)
+            console.log('res.locals.user :', res.locals.user )
+            
 
             next();
 

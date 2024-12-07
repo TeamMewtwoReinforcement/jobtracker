@@ -22,7 +22,7 @@ const LoginForm: React.FC = () => {
     const handleSubmit = async () => {
         //INSERT URL FOR LOGIN ENDPOINT 
         try {
-            const response = await fetch("ENTER URL", {
+            const response = await fetch("http://localhost:8080/user/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
