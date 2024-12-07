@@ -36,7 +36,7 @@ const JobList: React.FC = () => {
       jobTitle: "full stack engineer",
       location: "Orlando",
       flexibility: "remote",
-      status: "Phone Screen",
+      status: "Interview",
       dateApplied: "11.10.2024",
       contact: "None",
     },
@@ -115,4 +115,4 @@ const JobList: React.FC = () => {
   );
 };
 
-export default JobList;
+export default JobList

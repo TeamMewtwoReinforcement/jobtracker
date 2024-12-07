@@ -1,9 +1,11 @@
 import express , { Request, Response, NextFunction } from "express";
-import { CustomError } from '../types.ts'
+import { CustomError } from '../types.js'
 
 import path from "path";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import userRoutes from "./routes/userRoutes.js";
+import jobAppRoutes from "./routes/jobFormRoutes.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -32,6 +34,7 @@ app.use(express.static(path.resolve(__dirname, ".../dist")));
 app.get("/", sessionController.verifyToken, (req: Request, res: Response) =>
   res.sendFile(path.join(__dirname, "../dist/index.html"))
 );
+
 
 // User Routes
 app.use("/user", userRoutes);

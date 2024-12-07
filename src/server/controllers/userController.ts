@@ -3,7 +3,7 @@
 //import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from 'express';
 
-import supabase from '../db/dbconfig.ts'
+import supabase from '../db/dbconfig.js'
 
 
 // const JWT_SECRET = process.env.JWT_SECRET;
