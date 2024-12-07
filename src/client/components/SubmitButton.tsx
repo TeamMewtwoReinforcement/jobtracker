@@ -4,14 +4,15 @@ import React from "react";
 interface SubmitButtonProps {
   label: string;
   handleClick: () => void;
+  className?: string
 }
 
 
-const SubmitButton: React.FC<SubmitButtonProps> = ({ label, handleClick }) => {
+const SubmitButton: React.FC<SubmitButtonProps> = ({ label, className ='', handleClick }) => {
 
   
   return (
-    <button className="btn btn-wide" type='button' onClick={handleClick}>{label}</button>
+    <button className={`btn btn-wide ${className}`} type='button' onClick={handleClick}>{label}</button>
   )
 }
 

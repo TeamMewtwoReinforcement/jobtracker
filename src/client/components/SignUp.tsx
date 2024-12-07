@@ -90,12 +90,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ closeModal }) => {
                     </label>
 
                     <div className="text-center mt-4">
-                        <button
-                            type="submit"
-                            className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
-                        >
-                            Sign Up
-                        </button>
+                        <SubmitButton className='w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200' label='Sign Up' handleClick={handleSubmit} />
                     </div>
                 </form>
             </div>
