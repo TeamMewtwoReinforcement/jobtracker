@@ -9,16 +9,18 @@ import jobAppRoutes from "./routes/jobFormRoutes.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-import userRoutes from "./routes/userRoutes.ts";
 import jobRoutes from "./routes/jobRoutes.ts";
+import cookieParser from 'cookie-parser';
+
 const app = express();
 const PORT: number = 3000;
 
 console.log("Server script loaded");
 
 import cors from 'cors';
+import sessionController from "./controllers/sessionController.ts";
 app.use(cors());  // Allow all origins by default
-
+app.use(cookieParser());
 
 // Parse JSON bodies
 app.use(express.json());
@@ -28,7 +30,7 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, ".../dist")));
 
 // Main route - serve main HTML file
-app.get("/", (req: Request, res: Response) =>
+app.get("/", sessionController.verifyToken, (req: Request, res: Response) =>
   res.sendFile(path.join(__dirname, "../dist/index.html"))
 );
 
@@ -37,7 +39,7 @@ app.get("/", (req: Request, res: Response) =>
 app.use("/user", userRoutes);
 
 // Job Routes
-app.use("/job", jobRoutes)
+app.use("/job", sessionController.verifyToken, jobRoutes)
 
 // Catch-all route handler for any requests to an unknown route
 app.use('*', (req: Request, res: Response) => {
