@@ -27,7 +27,7 @@ const sessionController = {
 
     verifyToken: async (req: Request, res: Response, next: NextFunction) => {
 
-        //console.log('veryfyToken', req.cookies['access_token'])
+        console.log('veryfyToken', req.cookies['access_token'])
         const token = req.cookies['access_token'];
     
         if (!token) {
@@ -44,10 +44,6 @@ const sessionController = {
         //console.log('verfy token res.local.uer is',res.locals.user)
         next();
     }
-
-
-
-
     
 }
 
