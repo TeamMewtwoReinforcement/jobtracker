@@ -3,8 +3,10 @@ import supabase from "../db/dbconfig.ts";
 
 const jobController = {
   createJob: async (req: Request, res: Response, next: NextFunction) => {
+    
+    const  user_id  = res.locals.user.id;
+
     const {
-      user_id,
       company,
       title,
       location,
@@ -15,6 +17,7 @@ const jobController = {
     } = req.body;
 
     try {
+      console.log('here')
       const { data, error } = await supabase
         .from("jobs")
         .insert([
@@ -49,7 +52,9 @@ const jobController = {
   },
 
   getAllJobs: async (req: Request, res: Response, next: NextFunction) => {
-    const { user_id } = req.body;
+    //const { user_id } = req.body;
+    const  user_id  = res.locals.user.id;
+
     let { data: jobs, error } = await supabase
       .from("jobs")
       .select("*")
