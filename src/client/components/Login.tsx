@@ -2,6 +2,7 @@
 import React from "react";
 import SubmitButton from "./SubmitButton.tsx";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm: React.FC = () => {
     const [loginData, setLoginData] = useState({
@@ -10,6 +11,7 @@ const LoginForm: React.FC = () => {
     });
 
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const navigate = useNavigate()
 
     const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -20,7 +22,6 @@ const LoginForm: React.FC = () => {
     };
 
     const handleSubmit = async () => {
-        //INSERT URL FOR LOGIN ENDPOINT 
         try {
             const response = await fetch("http://localhost:8080/user/login", {
                 method: "POST",
@@ -28,7 +29,13 @@ const LoginForm: React.FC = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(loginData),
-            })
+            });
+
+            if (response.ok) {
+                navigate("/dashboard"); 
+            } else {
+                alert("Login failed. Please check your credentials.");
+            }
 
         } catch (error) {
             console.error("LoginComponent Error", error)
